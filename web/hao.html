@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
-    <title>视频观看</title>
+    <title>MP4 Video Player</title>
 </head>
 
 <body class="bg-gray-100 flex justify-center items-center min-h-screen">
@@ -15,7 +15,7 @@
             <source src="f99.mp4" type="video/mp4">
             你的浏览器不支持播放此视频。
         </video>
-        <p id="errorMessage" class="hidden text-red-500 text-center p-4">抱歉，该视频已经下架。</p>
+        <p id="errorMessage" class="hidden text-red-500 text-center p-4">未找到视频内容。</p>
     </div>
     <script>
         const video = document.getElementById('videoPlayer');
@@ -25,8 +25,14 @@
             video.style.display = 'none';
             errorMessage.classList.remove('hidden');
         });
+
+        video.addEventListener('loadedmetadata', () => {
+            if (isNaN(video.duration) || video.duration < 0.1) {
+                video.style.display = 'none';
+                errorMessage.classList.remove('hidden');
+            }
+        });
     </script>
 </body>
 
 </html>
-    
