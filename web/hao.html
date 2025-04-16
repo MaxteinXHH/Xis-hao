@@ -6,16 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
-    <title>视频分享</title>
+    <title>视频观看</title>
 </head>
 
 <body class="bg-gray-100 flex justify-center items-center min-h-screen">
     <div class="max-w-3xl w-full rounded-md overflow-hidden shadow-lg">
-        <video controls class="w-full">
-            <source src="f99.mp4" type="video/mp4" alt="很抱歉，该视频已经下架">
+        <video id="videoPlayer" controls class="w-full">
+            <source src="f99.mp4" type="video/mp4">
             你的浏览器不支持播放此视频。
         </video>
+        <p id="errorMessage" class="hidden text-red-500 text-center p-4">抱歉，该视频已经下架。</p>
     </div>
+    <script>
+        const video = document.getElementById('videoPlayer');
+        const errorMessage = document.getElementById('errorMessage');
+
+        video.addEventListener('error', () => {
+            video.style.display = 'none';
+            errorMessage.classList.remove('hidden');
+        });
+    </script>
 </body>
 
 </html>
+    
