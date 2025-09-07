@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>视频播放</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <style>
+        .video-container {
+            position: relative;
+            max-width: 1280px;
+            margin: 0 auto;
+            cursor: pointer;
+        }
+        .play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 100px;
+            background-color: rgba(0,0,0,0.6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .play-overlay:hover {
+            background-color: rgba(0,123,255,0.8);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+        img, video {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen p-4 md:p-8">
+    <div class="container mx-auto">
+        <header class="mb-8 text-center">
+            <h1 class="text-2xl md:text-3xl font-bold text-gray-800">视频播放</h1>
+        </header>
+        
+        <main>
+            <div class="video-container" id="videoContainer">
+                <!-- 初始显示封面图 -->
+                <img src="ys01.png" alt="视频封面" id="videoCover">
+                
+                <!-- 播放按钮覆盖层 -->
+                <div class="play-overlay">
+                    <i class="fa fa-play text-white text-3xl ml-2"></i>
+                </div>
+                
+                <!-- 视频元素（初始隐藏） -->
+                <video id="mainVideo" controls style="display: none;">
+                    <source src="ys01.mp4" type="video/mp4">
+                    您的浏览器不支持HTML5视频播放
+                </video>
+            </div>
+            
+            <div class="mt-4 text-center text-gray-600 text-sm">
+                <p>点击开始播放视频</p>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // 获取元素
+        const container = document.getElementById('videoContainer');
+        const cover = document.getElementById('videoCover');
+        const video = document.getElementById('mainVideo');
+        const overlay = document.querySelector('.play-overlay');
+        
+        // 点击事件：隐藏封面，显示并播放视频
+        container.addEventListener('click', () => {
+            cover.style.display = 'none';
+            overlay.style.display = 'none';
+            video.style.display = 'block';
+            video.play();
+        });
+    </script>
+</body>
+</html>
